@@ -8,13 +8,13 @@ import {
     IconButton,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import StatBox from "../../components/StatBox";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import { mockRegistry } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import DataCard from "../../components/DataCard";
 
 function Statistics() {
     const theme = useTheme();
@@ -102,7 +102,7 @@ function Statistics() {
 
                 <Grid container spacing={2} disableEqualOverflow>
                     <Grid container xs={12} md={6}>
-                        <Grid xs={6} md={6}>
+                        <Grid xs={6} md={4}>
                             <Box
                                 backgroundColor={colors.primary[400]}
                                 display="flex"
@@ -110,15 +110,11 @@ function Statistics() {
                                 justifyContent="center"
                                 sx={{ height: 140 }}
                             >
-                                <StatBox
-                                    stat="12,362"
-                                    title="Tháng 3"
-                                    subtitle="Xe đăng kiểm mới"
-                                />
+                                <DataCard data="12,362" title="Khách hàng" />
                             </Box>
                         </Grid>
 
-                        <Grid xs={6} md={6}>
+                        <Grid xs={6} md={4}>
                             <Box
                                 backgroundColor={colors.primary[400]}
                                 display="flex"
@@ -126,17 +122,11 @@ function Statistics() {
                                 justifyContent="center"
                                 sx={{ height: 140 }}
                             >
-                                <StatBox
-                                    stat="27,362"
-                                    title="Quý 1"
-                                    subtitle="Xe đăng kiểm mới"
-                                    progress="0.35"
-                                    increase="+35%"
-                                />
+                                <DataCard data="27,362" title="Xe đăng kiểm" />
                             </Box>
                         </Grid>
 
-                        <Grid xs={6} md={6}>
+                        <Grid xs={6} md={4}>
                             <Box
                                 backgroundColor={colors.primary[400]}
                                 display="flex"
@@ -144,17 +134,11 @@ function Statistics() {
                                 justifyContent="center"
                                 sx={{ height: 140 }}
                             >
-                                <StatBox
-                                    stat="27,362"
-                                    title="Năm 2023"
-                                    subtitle="Xe đăng kiểm mới"
-                                    progress="0.35"
-                                    increase="+35%"
-                                />
+                                <DataCard data="27,362" title="Av. Đăng kiểm" />
                             </Box>
                         </Grid>
 
-                        <Grid xs={6} md={6}>
+                        <Grid xs={6} md={4}>
                             <Box
                                 backgroundColor={colors.primary[400]}
                                 display="flex"
@@ -162,13 +146,31 @@ function Statistics() {
                                 justifyContent="center"
                                 sx={{ height: 140 }}
                             >
-                                <StatBox
-                                    stat="1,362"
-                                    title="Thống kê"
-                                    subtitle="Xe sắp hết hạn đăng kiểm"
-                                    progress="0.05"
-                                    increase="5%"
-                                />
+                                <DataCard data="95%" title="Tỉ lệ thành công" />
+                            </Box>
+                        </Grid>
+
+                        <Grid xs={6} md={4}>
+                            <Box
+                                backgroundColor={colors.primary[400]}
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ height: 140 }}
+                            >
+                                <DataCard data="15%" title="Tăng trưởng" />
+                            </Box>
+                        </Grid>
+
+                        <Grid xs={6} md={4}>
+                            <Box
+                                backgroundColor={colors.primary[400]}
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{ height: 140 }}
+                            >
+                                <DataCard data="+34%" title="Doanh thu" />
                             </Box>
                         </Grid>
                     </Grid>

@@ -154,6 +154,13 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
+                        <Item
+                            title="Quản lý tài khoản"
+                            to="/accountManagement"
+                            icon={<ManageAccountsOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                         <Typography
                             variant="h6"
                             color={colors.grey[300]}

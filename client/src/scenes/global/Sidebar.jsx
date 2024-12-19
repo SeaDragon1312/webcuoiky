@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
-
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -170,9 +171,9 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Quản lý Trung Tâm"
+                            title="Quản lý trung tâm đăng kiểm"
                             to="/centerManagement"
-                            icon={<HomeOutlinedIcon />}
+                            icon={<BusinessOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -201,6 +202,13 @@ const Sidebar = () => {
                             title="Thống kê phân loại"
                             to="/pie"
                             icon={<PieChartOutlineOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Danh sách đăng kiểm"
+                            to="/registration-list"
+                            icon={<FormatListBulletedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

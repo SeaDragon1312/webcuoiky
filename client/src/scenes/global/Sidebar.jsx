@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import AddIcon from "@mui/icons-material/Add";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -150,7 +151,7 @@ const Sidebar = () => {
                         <Item
                             title="Đăng kiểm mới"
                             to="/addRegistry"
-                            icon={<PersonOutlinedIcon />}
+                            icon={<AddIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -158,6 +159,20 @@ const Sidebar = () => {
                             title="Quản lý tài khoản"
                             to="/accountManagement"
                             icon={<ManageAccountsOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Quản lý phương tiện"
+                            to="/verhicleManagement"
+                            icon={<DirectionsCarOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Quản lý Trung Tâm"
+                            to="/centerManagement"
+                            icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

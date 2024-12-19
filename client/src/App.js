@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import FormLogin from "./components/login/formlogin";
 import Statistics from "./scenes/statistics";
 import AccountManagement from "./scenes/accountManagement";
+import VerhicalManagement from "./scenes/verhicleManagement";
+import CenterManagement from "./scenes/centerManagement";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -57,6 +59,11 @@ function App() {
                 path="/accountManagement"
                 element={<AccountManagement />}
               />
+              <Route
+                path="/verhicleManagement"
+                element={<VerhicalManagement />}
+              />
+              <Route path="/centerManagement" element={<CenterManagement />} />
               <Route path="/line" element={<Line />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/login" element={<FormLogin />} />

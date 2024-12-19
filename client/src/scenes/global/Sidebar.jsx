@@ -7,9 +7,9 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
@@ -183,9 +183,9 @@ const Sidebar = () => {
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Thống kê phân loại"
-                            to="/pie"
-                            icon={<PieChartOutlineOutlinedIcon />}
+                            title="Danh sách đăng kiểm"
+                            to="/registration-list"
+                            icon={<FormatListBulletedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

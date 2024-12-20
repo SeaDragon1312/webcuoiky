@@ -198,13 +198,7 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                         />
-                        <Item
-                            title="Thống kê phân loại"
-                            to="/pie"
-                            icon={<PieChartOutlineOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+
                         <Item
                             title="Danh sách đăng kiểm"
                             to="/registration-list"

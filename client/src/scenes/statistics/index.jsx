@@ -1,11 +1,4 @@
-import {
-    Typography,
-    Box,
-    useTheme,
-    Select,
-    MenuItem,
-    Button,
-} from "@mui/material";
+import { Box, useTheme, Select, MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
@@ -13,10 +6,26 @@ import { useState } from "react";
 import { mockRegistry } from "../../data/mockData";
 import DataCard from "../../components/DataCard";
 import PieChart from "../../components/PieChart";
+import { ResponsiveBar } from "@nivo/bar";
+
+const data = [
+    { month: "JAN", value: 120 },
+    { month: "FEB", value: 200 },
+    { month: "MAR", value: 150 },
+    { month: "APR", value: 220 },
+    { month: "MAY", value: 300 },
+    { month: "JUN", value: 250 },
+    { month: "JUL", value: 180 },
+    { month: "AUG", value: 280 },
+    { month: "SEP", value: 320 },
+    { month: "OCT", value: 350 },
+    { month: "NOV", value: 400 },
+    { month: "DEC", value: 420 },
+];
 
 function Statistics() {
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    const themeTokens = tokens(theme.palette.mode);
     const [time, setTime] = useState();
     const [center, setCenter] = useState("all");
     const [line, setLine] = useState(0);
@@ -65,7 +74,7 @@ function Statistics() {
                         }}
                         label="Trung tâm"
                         InputLabelProps={{
-                            sx: { color: colors.grey[800] },
+                            sx: { color: themeTokens.grey[800] },
                         }}
                     >
                         <MenuItem disabled value="">
@@ -103,7 +112,7 @@ function Statistics() {
                     <Grid container xs={12} md={6}>
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -115,7 +124,7 @@ function Statistics() {
 
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -127,7 +136,7 @@ function Statistics() {
 
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -139,7 +148,7 @@ function Statistics() {
 
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -151,7 +160,7 @@ function Statistics() {
 
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -163,7 +172,7 @@ function Statistics() {
 
                         <Grid xs={6} md={4}>
                             <Box
-                                backgroundColor={colors.primary[400]}
+                                backgroundColor={themeTokens.primary[400]}
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
@@ -174,64 +183,65 @@ function Statistics() {
                         </Grid>
                     </Grid>
 
-                    <Grid xs={12} md={6}>
-                        <Box
-                            backgroundColor={colors.primary[400]}
-                            overflow="auto"
-                            sx={{ height: "300px" }}
-                        >
-                            <Box
-                                display="flex"
-                                justifyContent="space-between"
-                                alignItems="center"
-                                borderBottom={`4px solid ${colors.primary[500]}`}
-                                colors={colors.grey[100]}
-                                p="15px"
-                            >
-                                <Typography
-                                    color={colors.grey[100]}
-                                    variant="h5"
-                                    fontWeight="600"
-                                >
-                                    Đăng kiểm gần đây
-                                </Typography>
-                            </Box>
-                            {mockRegistry.map((registry, i) => (
-                                <Box
-                                    key={`${registry.ID}-${i}`}
-                                    display="flex"
-                                    justifyContent="space-between"
-                                    alignItems="center"
-                                    borderBottom={`4px solid ${colors.primary[500]}`}
-                                    p="15px"
-                                >
-                                    <Box>
-                                        <Typography
-                                            color={colors.greenAccent[500]}
-                                            variant="h5"
-                                            fontWeight="600"
-                                        >
-                                            {registry.ID}
-                                        </Typography>
-                                    </Box>
-                                    <Box color={colors.grey[100]}>
-                                        {registry.center}
-                                    </Box>
-                                    <Box color={colors.grey[100]}>
-                                        {registry.date}
-                                    </Box>
-                                    <Button
-                                        color="secondary"
-                                        variant="contained"
-                                        p="5px 10px"
-                                        borderradius="4px"
-                                        type="submit"
-                                    >
-                                        Xem chi tiết
-                                    </Button>
-                                </Box>
-                            ))}
-                        </Box>
+                    <Grid height="40vh" xs={12} md={6}>
+                        <ResponsiveBar
+                            data={data}
+                            keys={["value"]}
+                            indexBy="month"
+                            margin={{
+                                top: 50,
+                                right: 50,
+                                bottom: 50,
+                                left: 50,
+                            }}
+                            padding={0.3}
+                            valueScale={{ type: "linear" }}
+                            indexScale={{ type: "band", round: true }}
+                            themeTokens={({ index }) => {
+                                // Sử dụng màu sắc từ theme
+                                const colors = [
+                                    themeTokens.blueAccent[300],
+                                    themeTokens.greenAccent[500],
+                                    themeTokens.redAccent[500],
+                                ];
+                                return colors[index % colors.length];
+                            }}
+                            axisTop={null}
+                            axisRight={null}
+                            axisBottom={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                            }}
+                            axisLeft={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                            }}
+                            labelSkipWidth={12}
+                            labelSkipHeight={12}
+                            labelTextColor={themeTokens.grey[300]}
+                            borderRadius={5} // Bo góc cho cột
+                            enableGridY={true}
+                            enableLabel={false} // Ẩn nhãn trên cột
+                            theme={{
+                                axis: {
+                                    ticks: {
+                                        text: {
+                                            fontSize: 12,
+                                            fill: "#9E9E9E",
+                                        },
+                                    },
+                                },
+                                tooltip: {
+                                    container: {
+                                        background: themeTokens.primary[900], // Màu nền mặc định của tooltip
+                                        color: themeTokens.grey[300], // Màu chữ
+                                        fontSize: "14px",
+                                    },
+                                },
+                            }}
+                        />
                     </Grid>
                 </Grid>
             </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogTitle, TextField, useTheme } from "@mui/material";
 import { DataGrid, GridToolbarContainer, GridToolbarExport, GridToolbarDensitySelector, GridToolbarColumnsButton } from "@mui/x-data-grid";
 import { Formik, Form, Field } from "formik";
@@ -12,35 +12,47 @@ import { tokens } from "../../theme";
 const initialValues = {
     username: "",
     email: "",
-    role: ""
+    phone: "",
+    fullname: "",
+    password: ""
 };
 
 const validationSchema = yup.object({
     username: yup.string().required("Required"),
     email: yup.string().email("Invalid email format").required("Required"),
-    role: yup.string().required("Required")
+    phone: yup.string().required("Required"),
+    fullname: yup.string().required("Required"),
+    password: yup.string().required("Required")
 });
-
-const initialAccounts = [
-    { id: 1, username: "user1", email: "user1@example.com", role: "admin" },
-    { id: 2, username: "user2", email: "user2@example.com", role: "user" },
-    { id: 3, username: "user3", email: "user3@example.com", role: "user" },
-    { id: 4, username: "user4", email: "user4@example.com", role: "user" },
-    { id: 5, username: "user5", email: "user5@example.com", role: "user" },
-    { id: 6, username: "user6", email: "user6@example.com", role: "user" },
-    { id: 7, username: "user7", email: "user7@example.com", role: "user" },
-    { id: 8, username: "user8", email: "user8@example.com", role: "user" }
-];
 
 const AccountManagement = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [accounts, setAccounts] = useState(initialAccounts);
+    const [accounts, setAccounts] = useState([]);
     const [open, setOpen] = useState(false);
     const [editAccount, setEditAccount] = useState(null);
     const [deleteAccount, setDeleteAccount] = useState(null);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pageSize, setPageSize] = useState(10);
+
+    useEffect(() => {
+        fetchAccounts();
+    }, []);
+
+    const fetchAccounts = async () => {
+        try {
+            const response = await fetch("http://localhost:3001/api/user");
+            const data = await response.json();
+            if (response.ok) {
+                setAccounts(data);
+            } else {
+                toast.error(data);
+            }
+        } catch (error) {
+            console.error("Error fetching accounts:", error);
+            toast.error("An error occurred. Please try again.");
+        }
+    };
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
@@ -58,15 +70,37 @@ const AccountManagement = () => {
         setDeleteAccount(null);
     };
 
-    const handleFormSubmit = (values) => {
-        if (editAccount) {
-            setAccounts(accounts.map(acc => acc.id === editAccount.id ? { ...acc, ...values } : acc));
-            toast.success("Cập nhật tài khoản thành công");
-        } else {
-            setAccounts([...accounts, { id: accounts.length + 1, ...values }]);
-            toast.success("Thêm tài khoản thành công");
+    const handleFormSubmit = async (values) => {
+        try {
+            const response = editAccount
+                ? await fetch(`http://localhost:3001/api/user/${editAccount.id}`, {
+                      method: "PUT",
+                      headers: {
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(values),
+                  })
+                : await fetch("http://localhost:3001/api/auth/signup", {
+                      method: "POST",
+                      headers: {
+                          "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(values),
+                  });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                fetchAccounts();
+                toast.success(editAccount ? "Cập nhật tài khoản thành công" : "Thêm tài khoản thành công");
+                handleClose();
+            } else {
+                toast.error(data);
+            }
+        } catch (error) {
+            console.error("Error saving account:", error);
+            toast.error("An error occurred. Please try again.");
         }
-        handleClose();
     };
 
     const handleEdit = (account) => {
@@ -74,17 +108,33 @@ const AccountManagement = () => {
         handleOpen();
     };
 
-    const handleDelete = () => {
-        setAccounts(accounts.filter(acc => acc.id !== deleteAccount.id));
-        toast.success("Xóa tài khoản thành công");
-        handleConfirmClose();
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/api/user/${deleteAccount.id}`, {
+                method: "DELETE",
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                fetchAccounts();
+                toast.success("Xóa tài khoản thành công");
+                handleConfirmClose();
+            } else {
+                toast.error(data);
+            }
+        } catch (error) {
+            console.error("Error deleting account:", error);
+            toast.error("An error occurred. Please try again.");
+        }
     };
 
     const columns = [
         { field: "id", headerName: "ID", flex: 1 },
         { field: "username", headerName: "Tên tài khoản", flex: 2 },
+        { field: "fullname", headerName: "Họ và tên", flex: 2 },
         { field: "email", headerName: "Email", flex: 3 },
-        { field: "role", headerName: "Vai trò", flex: 2 },
+        { field: "phone", headerName: "Số điện thoại", flex: 2 },
         {
             field: "actions",
             headerName: "Hành động",
@@ -198,12 +248,31 @@ const AccountManagement = () => {
                                 />
                                 <Field
                                     as={TextField}
-                                    name="role"
-                                    label="Vai trò"
+                                    name="phone"
+                                    label="Số điện thoại"
                                     fullWidth
                                     margin="normal"
-                                    error={touched.role && !!errors.role}
-                                    helperText={touched.role && errors.role}
+                                    error={touched.phone && !!errors.phone}
+                                    helperText={touched.phone && errors.phone}
+                                />
+                                <Field
+                                    as={TextField}
+                                    name="fullname"
+                                    label="Họ và tên"
+                                    fullWidth
+                                    margin="normal"
+                                    error={touched.fullname && !!errors.fullname}
+                                    helperText={touched.fullname && errors.fullname}
+                                />
+                                <Field
+                                    as={TextField}
+                                    name="password"
+                                    label="Mật khẩu"
+                                    type="password"
+                                    fullWidth
+                                    margin="normal"
+                                    error={touched.password && !!errors.password}
+                                    helperText={touched.password && errors.password}
                                 />
                                 <DialogActions>
                                     <Button onClick={handleClose} color="secondary">Hủy</Button>

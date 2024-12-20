@@ -49,14 +49,14 @@ const calculateStatus = (expiryDate) => {
 };
 
 const initialVehicles = [
-    { id: 1, licensePlate: "ABC123", registryNumber: "RN123", owner: "John Doe", registryDate: "2024-01-01", expiryDate: "2024-12-01", color: "Red", usage: "Personal", phoneNumber: "123456789" },
-    { id: 2, licensePlate: "XYZ789", registryNumber: "RN456", owner: "Jane Smith", registryDate: "2024-06-15", expiryDate: "2024-11-15", color: "Blue", usage: "Commercial", phoneNumber: "987654321" },
-    { id: 3, licensePlate: "DEF456", registryNumber: "RN789", owner: "Alice Johnson", registryDate: "2024-03-10", expiryDate: "2024-10-10", color: "Green", usage: "Personal", phoneNumber: "555555555" },
-    { id: 4, licensePlate: "GHI012", registryNumber: "RN012", owner: "Bob Brown", registryDate: "2024-07-20", expiryDate: "2025-01-20", color: "Yellow", usage: "Commercial", phoneNumber: "444444444" },
-    { id: 5, licensePlate: "JKL345", registryNumber: "RN345", owner: "Charlie Davis", registryDate: "2024-09-05", expiryDate: "2025-03-05", color: "Black", usage: "Personal", phoneNumber: "333333333" },
-    { id: 6, licensePlate: "MNO678", registryNumber: "RN678", owner: "Diana Evans", registryDate: "2024-11-25", expiryDate: "2025-05-25", color: "White", usage: "Commercial", phoneNumber: "222222222" },
-    { id: 7, licensePlate: "PQR901", registryNumber: "RN901", owner: "Eve Foster", registryDate: "2024-02-14", expiryDate: "2024-12-14", color: "Purple", usage: "Personal", phoneNumber: "111111111" },
-    { id: 8, licensePlate: "STU234", registryNumber: "RN234", owner: "Frank Green", registryDate: "2024-04-18", expiryDate: "2024-11-18", color: "Orange", usage: "Commercial", phoneNumber: "666666666" }
+    { id: 1, licensePlate: "ABC123", registryNumber: "RN123", owner: "John Doe", registryDate: "2024-01-01", expiryDate: "2024-12-01", color: "Red", usage: "Personal", phoneNumber: "123456789", brand: "Toyota", model: "Camry", year: 2020 },
+    { id: 2, licensePlate: "XYZ789", registryNumber: "RN456", owner: "Jane Smith", registryDate: "2024-06-15", expiryDate: "2024-11-15", color: "Blue", usage: "Commercial", phoneNumber: "987654321", brand: "Honda", model: "Civic", year: 2019 },
+    { id: 3, licensePlate: "DEF456", registryNumber: "RN789", owner: "Alice Johnson", registryDate: "2024-03-10", expiryDate: "2024-10-10", color: "Green", usage: "Personal", phoneNumber: "555555555", brand: "Ford", model: "Focus", year: 2018 },
+    { id: 4, licensePlate: "GHI012", registryNumber: "RN012", owner: "Bob Brown", registryDate: "2024-07-20", expiryDate: "2025-01-20", color: "Yellow", usage: "Commercial", phoneNumber: "444444444", brand: "Chevrolet", model: "Malibu", year: 2021 },
+    { id: 5, licensePlate: "JKL345", registryNumber: "RN345", owner: "Charlie Davis", registryDate: "2024-09-05", expiryDate: "2025-03-05", color: "Black", usage: "Personal", phoneNumber: "333333333", brand: "Nissan", model: "Altima", year: 2022 },
+    { id: 6, licensePlate: "MNO678", registryNumber: "RN678", owner: "Diana Evans", registryDate: "2024-11-25", expiryDate: "2025-05-25", color: "White", usage: "Commercial", phoneNumber: "222222222", brand: "Hyundai", model: "Elantra", year: 2023 },
+    { id: 7, licensePlate: "PQR901", registryNumber: "RN901", owner: "Eve Foster", registryDate: "2024-02-14", expiryDate: "2024-12-14", color: "Purple", usage: "Personal", phoneNumber: "111111111", brand: "Kia", model: "Optima", year: 2021 },
+    { id: 8, licensePlate: "STU234", registryNumber: "RN234", owner: "Frank Green", registryDate: "2024-04-18", expiryDate: "2024-11-18", color: "Orange", usage: "Commercial", phoneNumber: "666666666", brand: "Mazda", model: "Mazda3", year: 2020 }
 ].map(vehicle => ({ ...vehicle, status: calculateStatus(vehicle.expiryDate) }));
 
 const VehicleManagement = () => {

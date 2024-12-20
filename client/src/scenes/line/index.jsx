@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Typography, Box, MenuItem, Select, useTheme } from "@mui/material";
+import { Box, MenuItem, Select, useTheme } from "@mui/material";
 import Header from "../../components/Header";
-import LineChart from "../../components/LineChart";
+// import LineChart from "../../components/LineChart";
 import { mockRegistry } from "../../data/mockData";
 import { tokens } from "../../theme";
 import { ResponsiveBar } from "@nivo/bar";

@@ -16,9 +16,9 @@ const RegistrationList = () => {
             headerName: "Customer",
             flex: 6,
         },
-        { field: "date", headerName: "Date", flex: 5 },
-        { field: "amount", headerName: "Amount", flex: 5 },
-        { field: "payment-mode", headerName: "Payment Mode", flex: 5 },
+        // { field: "date", headerName: "Date", flex: 5 },
+        // { field: "amount", headerName: "Amount", flex: 5 },
+        // { field: "payment-mode", headerName: "Payment Mode", flex: 5 },
         { field: "status", headerName: "Status", flex: 6 },
         {
             field: "action",
